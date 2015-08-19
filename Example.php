@@ -11,11 +11,13 @@ $tokenizer->addDefinition('/', '[/]');
 $tokenizer->addDefinition('=', '[=]');
 $tokenizer->addDefinition('(', '[(]');
 $tokenizer->addDefinition(')', '[)]');
-$tokenizer->addDefinition('set', 'set'); // added first, so will take priority over "identifier"
+$tokenizer->addDefinition('command', 'set');
 $tokenizer->addDefinition('number', '[0-9]+([.][0-9]+)?');
 $tokenizer->addDefinition('identifier', '[a-zA-Z_]\w*');
 $tokenizer->ignore(' ');
 
-$tokens = $tokenizer->tokenize("set x = (14 + y) - 12.5");
+// "set" will be a "command", because it was added first and takes priority over "identifier"
+// "sets" will be an "identifier", because longer matches have priority, 4 characters vs 3 characters
+$tokens = $tokenizer->tokenize("set x = (14 + y) - 12.5 + sets");
 
 var_dump($tokens);
