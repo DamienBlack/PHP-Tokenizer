@@ -23,7 +23,7 @@ class Tokenizer {
     public function tokenize($text) {
         $this->tokens = [];
         $text = $this->stripIgnored($text);
-        while ($text) {
+        while (strlen($text)) {
             $bestMatch = false;
             $bestMatchLength = 0;
             foreach ($this->allDefinitions as $definition) {
